@@ -1,7 +1,7 @@
 <launch>
 
-  <arg name="world_name" default="tunnel"/>
-  <arg name="vehicleHeight" default="0.75"/>
+  <arg name="world_name" default="matterport"/>
+  <arg name="vehicleHeight" default="0.5"/>
   <arg name="cameraOffsetZ" default="0"/>
   <arg name="vehicleX" default="0"/>
   <arg name="vehicleY" default="0"/>
@@ -40,6 +40,8 @@
   <include file="$(find visualization_tools)/launch/visualization_tools.launch" >
     <arg name="world_name" value="$(arg world_name)"/>
   </include>
+
+  <include file="$(find segmentation_proc)/launch/segmentation_proc.launch" />
 
   <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find vehicle_simulator)/rviz/vehicle_simulator.rviz" respawn="true"/>
 
