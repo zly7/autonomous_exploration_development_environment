@@ -174,7 +174,7 @@ void scanHandler(const sensor_msgs::PointCloud2::ConstPtr& scanIn)
   sensor_msgs::PointCloud2 scanData2;
   pcl::toROSMsg(*scanData, scanData2);
   scanData2.header.stamp = ros::Time().fromSec(odomRecTime);
-  scanData2.header.frame_id = "/map";
+  scanData2.header.frame_id = "map";
   pubScanPointer->publish(scanData2);
 }
 
@@ -336,13 +336,13 @@ int main(int argc, char** argv)
   ros::Publisher pubVehicleOdom = nh.advertise<nav_msgs::Odometry>("/state_estimation", 5);
 
   nav_msgs::Odometry odomData;
-  odomData.header.frame_id = "/map";
-  odomData.child_frame_id = "/sensor";
+  odomData.header.frame_id = "map";
+  odomData.child_frame_id = "sensor";
 
   tf::TransformBroadcaster tfBroadcaster;
   tf::StampedTransform odomTrans;
-  odomTrans.frame_id_ = "/map";
-  odomTrans.child_frame_id_ = "/sensor";
+  odomTrans.frame_id_ = "map";
+  odomTrans.child_frame_id_ = "sensor";
 
   ros::Publisher pubModelState = nh.advertise<gazebo_msgs::ModelState>("/gazebo/set_model_state", 5);
   gazebo_msgs::ModelState cameraState;
@@ -383,7 +383,9 @@ int main(int argc, char** argv)
                 0.005 * vehicleYawRate * (cos(vehicleYaw) * sensorOffsetX - sin(vehicleYaw) * sensorOffsetY);
     vehicleZ = terrainZ + vehicleHeight;
 
+    ros::Time odomTimeRec = odomTime;
     odomTime = ros::Time::now();
+    if (odomTime == odomTimeRec) odomTime += ros::Duration(0.005);
 
     odomSendIDPointer = (odomSendIDPointer + 1) % stackNum;
     odomTimeStack[odomSendIDPointer] = odomTime.toSec();
