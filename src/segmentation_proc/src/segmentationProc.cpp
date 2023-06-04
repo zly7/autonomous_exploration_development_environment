@@ -360,7 +360,7 @@ int main(int argc, char** argv)
 
   // read segmentation file
   if (readSegmentationFile(seg_file_dir.c_str()) != 1) {
-    printf("\nCouldn't read segmentation file.\n");
+    RCLCPP_INFO(nh->get_logger(), "Couldn't read segmentation file.");
   }
 
   // prepare point cloud messages
@@ -418,7 +418,7 @@ int main(int argc, char** argv)
     objectMarkerArray.markers[i].color.b = 0;
   }
 
-  printf("\nRead %d regions and %d objects.\n\n", regionNum, objectNum);
+  RCLCPP_INFO(nh->get_logger(), "Read %d regions and %d objects.", regionNum, objectNum);
 
   rclcpp::Rate rate(100);
   bool status = rclcpp::ok();
