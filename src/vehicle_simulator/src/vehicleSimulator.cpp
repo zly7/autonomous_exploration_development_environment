@@ -383,7 +383,7 @@ int main(int argc, char** argv)
 
   terrainDwzFilter.setLeafSize(terrainVoxelSize, terrainVoxelSize, terrainVoxelSize);
 
-  printf("\nSimulation started.\n\n");
+  RCLCPP_INFO(nh->get_logger(), "Simulation started.");
   
   rclcpp::Rate rate(200);
   bool status = rclcpp::ok();
