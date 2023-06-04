@@ -54,7 +54,7 @@ void readWaypointFile()
 {
   FILE* waypoint_file = fopen(waypoint_file_dir.c_str(), "r");
   if (waypoint_file == NULL) {
-    RCLCPP_INFO(nh->get_logger(), "\nCannot read input files, exit.\n\n");
+    RCLCPP_INFO(nh->get_logger(), "Cannot read input files, exit.");
     exit(1);
   }
 
@@ -64,7 +64,7 @@ void readWaypointFile()
   while (strCur != "end_header") {
     val = fscanf(waypoint_file, "%s", str);
     if (val != 1) {
-      RCLCPP_INFO(nh->get_logger(), "\nError reading input files, exit.\n\n");
+      RCLCPP_INFO(nh->get_logger(), "Error reading input files, exit.");
       exit(1);
     }
 
@@ -74,7 +74,7 @@ void readWaypointFile()
     if (strCur == "vertex" && strLast == "element") {
       val = fscanf(waypoint_file, "%d", &pointNum);
       if (val != 1) {
-        RCLCPP_INFO(nh->get_logger(), "\nError reading input files, exit.\n\n");
+        RCLCPP_INFO(nh->get_logger(), "Error reading input files, exit.");
         exit(1);
       }
     }
@@ -89,7 +89,7 @@ void readWaypointFile()
     val3 = fscanf(waypoint_file, "%f", &point.z);
 
     if (val1 != 1 || val2 != 1 || val3 != 1) {
-      RCLCPP_INFO(nh->get_logger(), "\nError reading input files, exit.\n\n");
+      RCLCPP_INFO(nh->get_logger(), "Error reading input files, exit.");
       exit(1);
     }
 
@@ -104,7 +104,7 @@ void readBoundaryFile()
 {
   FILE* boundary_file = fopen(boundary_file_dir.c_str(), "r");
   if (boundary_file == NULL) {
-    RCLCPP_INFO(nh->get_logger(), "\nCannot read input files, exit.\n\n");
+    RCLCPP_INFO(nh->get_logger(), "Cannot read input files, exit.");
     exit(1);
   }
 
@@ -114,7 +114,7 @@ void readBoundaryFile()
   while (strCur != "end_header") {
     val = fscanf(boundary_file, "%s", str);
     if (val != 1) {
-      RCLCPP_INFO(nh->get_logger(), "\nError reading input files, exit.\n\n");
+      RCLCPP_INFO(nh->get_logger(), "Error reading input files, exit.");
       exit(1);
     }
 
@@ -124,7 +124,7 @@ void readBoundaryFile()
     if (strCur == "vertex" && strLast == "element") {
       val = fscanf(boundary_file, "%d", &pointNum);
       if (val != 1) {
-        RCLCPP_INFO(nh->get_logger(), "\nError reading input files, exit.\n\n");
+        RCLCPP_INFO(nh->get_logger(), "Error reading input files, exit.");
         exit(1);
       }
     }
@@ -139,7 +139,7 @@ void readBoundaryFile()
     val3 = fscanf(boundary_file, "%f", &point.z);
 
     if (val1 != 1 || val2 != 1 || val3 != 1) {
-      RCLCPP_INFO(nh->get_logger(), "\nError reading input files, exit.\n\n");
+      RCLCPP_INFO(nh->get_logger(), "Error reading input files, exit.");
       exit(1);
     }
 
@@ -216,7 +216,7 @@ int main(int argc, char** argv)
   int waypointSize = waypoints->points.size();
 
   if (waypointSize == 0) {
-    RCLCPP_INFO(nh->get_logger(), "\nNo waypoint available, exit.\n\n");
+    RCLCPP_INFO(nh->get_logger(), "No waypoint available, exit.");
     exit(1);
   }
 
