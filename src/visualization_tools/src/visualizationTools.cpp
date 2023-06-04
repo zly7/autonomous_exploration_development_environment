@@ -272,7 +272,7 @@ int main(int argc, char** argv)
 
   pcl::PLYReader ply_reader;
   if (ply_reader.read(mapFile, *overallMapCloud) == -1) {
-    printf("\nCouldn't read pointcloud.ply file.\n\n");
+    RCLCPP_INFO(nh->get_logger(), "\nCouldn't read pointcloud.ply file.\n\n");
   }
 
   overallMapCloudDwz->clear();
@@ -312,7 +312,7 @@ int main(int argc, char** argv)
   fclose(metricFilePtr);
   fclose(trajFilePtr);
 
-  printf("\nExploration metrics and vehicle trajectory are saved in 'src/vehicle_simulator/log'.\n\n");
+  RCLCPP_INFO(nh->get_logger(), "\nExploration metrics and vehicle trajectory are saved in 'src/vehicle_simulator/log'.\n\n");
 
   return 0;
 }
