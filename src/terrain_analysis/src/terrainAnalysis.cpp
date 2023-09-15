@@ -47,6 +47,7 @@ bool clearDyObs = false;
 double minDyObsDis = 0.3;
 double minDyObsAngle = 0;
 double minDyObsRelZ = -0.5;
+double absDyObsRelZThre = 0.2;
 double minDyObsVFOV = -16.0;
 double maxDyObsVFOV = 16.0;
 int minDyObsPointNum = 1;
@@ -213,6 +214,7 @@ int main(int argc, char **argv) {
   nh->declare_parameter<double>("minDyObsDis", minDyObsDis);
   nh->declare_parameter<double>("minDyObsAngle", minDyObsAngle);
   nh->declare_parameter<double>("minDyObsRelZ", minDyObsRelZ);
+  nh->declare_parameter<double>("absDyObsRelZThre", absDyObsRelZThre);
   nh->declare_parameter<double>("minDyObsVFOV", minDyObsVFOV);
   nh->declare_parameter<double>("maxDyObsVFOV", maxDyObsVFOV);
   nh->declare_parameter<int>("minDyObsPointNum", minDyObsPointNum);
@@ -239,6 +241,7 @@ int main(int argc, char **argv) {
   nh->get_parameter("minDyObsDis", minDyObsDis);
   nh->get_parameter("minDyObsAngle", minDyObsAngle);
   nh->get_parameter("minDyObsRelZ", minDyObsRelZ);
+  nh->get_parameter("absDyObsRelZThre", absDyObsRelZThre);
   nh->get_parameter("minDyObsVFOV", minDyObsVFOV);
   nh->get_parameter("maxDyObsVFOV", maxDyObsVFOV);
   nh->get_parameter("minDyObsPointNum", minDyObsPointNum);
@@ -479,7 +482,7 @@ int main(int argc, char **argv) {
 
                 float dis4 = sqrt(pointX4 * pointX4 + pointY4 * pointY4);
                 float angle4 = atan2(pointZ4, dis4) * 180.0 / PI;
-                if (angle4 > minDyObsVFOV && angle4 < maxDyObsVFOV) {
+                if (angle4 > minDyObsVFOV && angle4 < maxDyObsVFOV || fabs(pointZ4) < absDyObsRelZThre) {
                   planarVoxelDyObs[planarVoxelWidth * indX + indY]++;
                 }
               }
