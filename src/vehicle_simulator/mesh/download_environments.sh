@@ -11,6 +11,7 @@ ggURL='https://drive.google.com/uc?export=download'
 
 filename="$(curl -sc /tmp/gcokie "${ggURL}&id=${ggID}" | grep -o '="uc-name.*</span>' | sed 's/.*">//;s/<.a> .*//')"
 html=`curl -c /tmp/gcokie -s -L "https://drive.google.com/uc?export=download&id=${ggID}"`
+echo "Filename: ${filename}"
 curl -Lb /tmp/gcokie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${ggID}" -o ${filename}
 
 echo ""

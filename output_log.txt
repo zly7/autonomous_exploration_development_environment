@@ -1,0 +1,10 @@
+
+Downloading simulation environments...
+
+Filename: 
+
+Unzipping files...
+
+
+Done, simulation environments are kept in 'src/vehicle_simulator/mesh'.
+
